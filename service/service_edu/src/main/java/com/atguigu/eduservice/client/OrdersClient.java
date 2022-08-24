@@ -1,12 +1,13 @@
 package com.atguigu.eduservice.client;
 
+import com.atguigu.eduservice.client.impl.OrdersFileDegradeFeignClient;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@ComponentScan
-@FeignClient("service-order")
+@Component
+@FeignClient(name = "service-order",fallback = OrdersFileDegradeFeignClient.class)
 public interface OrdersClient {
 
     //根据课程id和用户id查询订单表中订单状态
